@@ -16,6 +16,8 @@ namespace EasyHousing.API.Models
         public decimal PriceRange { get; set; }
         public decimal InitialDeposit { get; set; }
         public string Landmark { get; set; }
+        public string StateName { get; set; }
+        public string CityName { get; set; }
         public int SellerId { get; set; }
 
         public virtual Seller Seller { get; set; }

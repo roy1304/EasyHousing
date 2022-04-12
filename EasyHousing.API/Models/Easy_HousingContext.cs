@@ -25,7 +25,7 @@ namespace EasyHousing.API.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                //warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Data Source=BADSHA\\SQLEXPRESS; Initial Catalog=Easy_Housing; Integrated Security=True");
             }
         }
@@ -79,6 +79,11 @@ namespace EasyHousing.API.Models
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
+                entity.Property(e => e.CityName)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Description)
                     .HasMaxLength(250)
                     .IsUnicode(false);
@@ -107,11 +112,16 @@ namespace EasyHousing.API.Models
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
+                entity.Property(e => e.StateName)
+                    .IsRequired()
+                    .HasMaxLength(25)
+                    .IsUnicode(false);
+
                 entity.HasOne(d => d.Seller)
                     .WithMany(p => p.Properties)
                     .HasForeignKey(d => d.SellerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PROPERTY__Seller__5070F446");
+                    .HasConstraintName("FK__PROPERTY__Seller__6FE99F9F");
             });
 
             modelBuilder.Entity<Seller>(entity =>

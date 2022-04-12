@@ -11,6 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EasyHousing.API.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 namespace EasyHousing.API
 {
@@ -27,7 +30,10 @@ namespace EasyHousing.API
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<Easy_HousingContext>(options => options.UseSqlServer(Configuration.GetConnectionString("EasyHousingCon")));
+
             services.AddControllers();
+            services.AddControllers().AddJsonOptions(x =>x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EasyHousing.API", Version = "v1" });
